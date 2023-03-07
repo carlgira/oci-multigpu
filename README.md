@@ -49,6 +49,7 @@ To build the terraform solution, simply execute:
     ```
 
 # Deepseed
+
     ```bash
     deepspeed --hostfile=/home/opc/multigpu/deepseed-hosts --master_addr multigpu-0.subnet.vcn.oraclevcn.com --master_port 3000 DeepSpeedExamples/inference/huggingface/text-generation/inference-test.py --name bigscience/bloom-3b --batch_size 2
     ```
