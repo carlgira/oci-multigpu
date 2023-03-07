@@ -1,6 +1,6 @@
 # OCI MultiGPU 
 
-OCI MultiGPU Inference & Training with deepseed and accelerate.
+OCI MultiGPU Inference & Training with deepseed
 
 ## Requirements
 - Terraform
@@ -42,21 +42,16 @@ export TF_VAR_region='<oci-region>'
 ## Build
 
 To build the terraform solution, simply execute: 
-```bash
-terraform init
-terraform plan
-terraform apply
-```
+    ```bash
+    terraform init
+    terraform plan
+    terraform apply
+    ```
 
 # Deepseed
-```bash
-    deepspeed --num_gpus 1 DeepSpeedExamples/inference/huggingface/text-generation/inference-test.py --name bigscience/bloom-3b --batch_size 2 
-```
-
-```bash
-deepspeed --hostfile=/home/opc/.deepseed-hosts DeepSpeedExamples/inference/huggingface/text-generation/inference-test.py --name bigscience/bloom-3b --batch_size 2 
-```
-
+    ```bash
+    deepspeed --hostfile=/home/opc/multigpu/deepseed-hosts --master_addr multigpu-0.subnet.vcn.oraclevcn.com --master_port 3000 DeepSpeedExamples/inference/huggingface/text-generation/inference-test.py --name bigscience/bloom-3b --batch_size 2
+    ```
 
 ## Acknowledgements
 

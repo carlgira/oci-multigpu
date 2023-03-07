@@ -23,13 +23,17 @@ GPU_COUNT=`curl -L http://169.254.169.254/opc/v1/instance/ | jq -r '.metadata."g
 PRIVATE_KEY=`curl -L http://169.254.169.254/opc/v1/instance/ | jq -r '.metadata."private_key"'`
 
 su -c "mkdir -p /home/$USER/.ssh" $USER
+su -c "mkdir -p /home/$USER/multigpu" $USER
 su -c "echo \"$PRIVATE_KEY\" > /home/$USER/.ssh/id_rsa" $USER
 su -c "chmod 600 /home/$USER/.ssh/id_rsa" $USER
 
 for i in $(seq 0 $(expr $INSTANCE_COUNT - 1)); do
     su -c "ssh-keyscan -H multigpu-$i.subnet.vcn.oraclevcn.com >> /home/$USER/.ssh/known_hosts" $USER
-    su -c "echo \"multigpu-$i.subnet.vcn.oraclevcn.com slots=$GPU_COUNT\" >> /home/$USER/.deepseed-hosts" $USER
+    su -c "echo \"multigpu-$i.subnet.vcn.oraclevcn.com slots=$GPU_COUNT\" >> /home/$USER/multigpu/deepseed-hosts" $USER
 done
+
+firewall-cmd --zone=public --add-port=3000/tcp --permanent
+firewall-cmd --reload
 
 }
 

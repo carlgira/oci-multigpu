@@ -92,6 +92,16 @@ resource "oci_core_security_list" "generative_ai_security_list" {
             min = 22
         }
     }
+
+    ingress_security_rules {
+        protocol    = "6" # tcp
+        source      = "10.0.0.0/24"
+        description = ""
+        tcp_options {
+            max = 3000
+            min = 3000
+        }
+    }
 }
 
 # Create a subnet
