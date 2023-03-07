@@ -25,39 +25,40 @@ This repo enables you to create a cluster of GPUs instances and configure them t
 > **Note**: [More info on the list of available regions here.](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
 
 ```bash
-export TF_VAR_tenancy_ocid='<tenancy-ocid>'
-export TF_VAR_compartment_ocid='<comparment-ocid>'
-export TF_VAR_instance_count=<number-of-instances>
-export TF_VAR_region='<oci-region>'
+    export TF_VAR_tenancy_ocid='<tenancy-ocid>'
+    export TF_VAR_compartment_ocid='<comparment-ocid>'
+    export TF_VAR_instance_count=<number-of-instances>
+    export TF_VAR_region='<oci-region>'
 ```
 
-1. If you're using a Linux OS, you may need to execute the following command to obtain execution permissions on the shell script:
-    ```bash
+4. If you're using a Linux OS, you may need to execute the following command to obtain execution permissions on the shell script:
+```bash
     chmod a+x generate-keys.sh
-    ```
-2. Execute the script generate-keys.sh to generate private key to access the instance. 
-    ```bash
+```
+5. Execute the script generate-keys.sh to generate private key to access the instance. 
+```bash
     sh generate-keys.sh
-    ```
+```
 
 ## Build
 
 To build the terraform solution, simply execute: 
-    ```bash
+
+```bash
     terraform init
     terraform plan
     terraform apply
-    ```
+```
 
-# Test
+## Test
 A simple test to run bloom-3b in a GPU cluster using deepspeed.
 
-    ```bash
+```bash
     source ~/.venv/bin/activate
     deepspeed --hostfile=/home/opc/multigpu/deepseed-hosts --master_addr multigpu-0.subnet.vcn.oraclevcn.com --master_port 3000 DeepSpeedExamples/inference/huggingface/text-generation/inference-test.py --name bigscience/bloom-3b --batch_size 2
-    ```
+```
 
 ## Acknowledgements
 
 * **Author** - [Carlos Giraldo](https://www.linkedin.com/in/carlos-giraldo-a79b073b/), Oracle
-* **Last Updated Date** - March 6th, 2023
+* **Last Updated Date** - March 7th, 2023
