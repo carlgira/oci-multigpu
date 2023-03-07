@@ -58,6 +58,10 @@ A simple test to run bloom-3b in a GPU cluster using deepspeed.
     deepspeed --hostfile=/home/opc/multigpu/deepseed-hosts --master_addr multigpu-0.subnet.vcn.oraclevcn.com --master_port 3000 DeepSpeedExamples/inference/huggingface/text-generation/inference-test.py --name bigscience/bloom-3b --batch_size 2
 ```
 
+At the end you will see the completition of two phrases in each GPU
+
+<img src="deepspeed-inference.png" />
+
 ## Acknowledgements
 
 * **Author** - [Carlos Giraldo](https://www.linkedin.com/in/carlos-giraldo-a79b073b/), Oracle
