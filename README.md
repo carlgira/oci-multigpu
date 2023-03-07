@@ -1,6 +1,8 @@
 # OCI MultiGPU 
 
-OCI MultiGPU Inference & Training with deepseed
+This repo enables you to create a cluster of GPUs instances and configure them to use them with deepspeed, in a multi-node and multi-gpu scenario. It automatically installs the dependencies and configure all the instances so you can immediately use deepspeed for inference or training.
+
+[DeepSpeed](https://github.com/microsoft/DeepSpeed) is an easy-to-use deep learning optimization software suite that enables unprecedented scale and speed for Deep Learning Training and Inference.
 
 ## Requirements
 - Terraform
@@ -18,7 +20,7 @@ OCI MultiGPU Inference & Training with deepseed
 - The tenancy OCID, 
 - The comparment OCID where the instance will be created.
 - The number of instances to create
-- The number of available GPUs in each instance
+- The number of available GPUs in each instance. (get this value according with the shape to use)
 - The "Region Identifier" of region of your tenancy.
 > **Note**: [More info on the list of available regions here.](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
 
@@ -26,7 +28,6 @@ OCI MultiGPU Inference & Training with deepseed
 export TF_VAR_tenancy_ocid='<tenancy-ocid>'
 export TF_VAR_compartment_ocid='<comparment-ocid>'
 export TF_VAR_instance_count=<number-of-instances>
-export TF_VAR_gpus_per_instance=<number-of-gpus-per-instance>
 export TF_VAR_region='<oci-region>'
 ```
 
@@ -48,9 +49,11 @@ To build the terraform solution, simply execute:
     terraform apply
     ```
 
-# Deepseed
+# Test
+A simple test to run bloom-3b in a GPU cluster using deepspeed.
 
     ```bash
+    source ~/.venv/bin/activate
     deepspeed --hostfile=/home/opc/multigpu/deepseed-hosts --master_addr multigpu-0.subnet.vcn.oraclevcn.com --master_port 3000 DeepSpeedExamples/inference/huggingface/text-generation/inference-test.py --name bigscience/bloom-3b --batch_size 2
     ```
 
