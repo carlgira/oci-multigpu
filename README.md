@@ -51,7 +51,7 @@ To build the terraform solution, simply execute:
 ```
 
 ## Test
-A simple test to run bloom-3b in a GPU cluster using deepspeed. You can run this connecting to one of the instances, to execute deepspeed use the hostfile that contains the information of the cluster.
+A simple test to run bloom-3b in a GPU cluster using deepspeed. You can run this connecting to one of the instances, and execute deepspeed using the hostfile that contains the information of the cluster.
 
 ```bash
     source ~/.venv/bin/activate
